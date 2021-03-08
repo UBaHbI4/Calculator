@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btnTextSize">30sp</dimen>
+    <dimen name="inputTextTop">5dp</dimen>
+    <dimen name="inputTextBottom">20dp</dimen>
+    <dimen name="btnRadius">0dp</dimen>
+    <dimen name="btnInsetDef">0dp</dimen>
+    <dimen name="btnStrokeWidthDef">1dp</dimen>
+    <dimen name="btnCornerRadiusDef">0dp</dimen>
+    <dimen name="iconSizeDef">36sp</dimen>
+    <dimen name="iconPaddingDef">0dp</dimen>
+    <dimen name="marginBottomDef">2dp</dimen>
+    <item name="spaceHeight" type="dimen" format="float">0.15</item>
+    <item name="btnHeightPercentDef" type="dimen" format="float">0.18</item>
+    <item name="btnWidthPercentDef" type="dimen" format="float">0.25</item>
+</resources>
