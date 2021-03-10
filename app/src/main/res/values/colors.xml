@@ -13,4 +13,7 @@
     <color name="superLightGray">#E8E6E6</color>
     <color name="rippleOperationColor">#00B8D4</color>
     <color name="rippleEqualColor" >#AEEA00</color>
+    <color name="lightTransparent">#80FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="yellow">#FFD600</color>
 </resources>
