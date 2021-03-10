@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calculator</string>
+    <string name="app_name">Калькулятор</string>
     <string name="defValue">Введите пример</string>
     <string name="editTextHint">Введите пример</string>
     <string name="btnZeroText">0</string>
@@ -13,4 +13,8 @@
     <string name="btnEightText">8</string>
     <string name="btnNineText">9</string>
     <string name="btnPointText">.</string>
+    <string name="tagAdd">+</string>
+    <string name="tagDiv">/</string>
+    <string name="tagMul">x</string>
+    <string name="tagSub">-</string>
 </resources>
