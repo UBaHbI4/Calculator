@@ -11,6 +11,14 @@ package softing.ubah4ukdev.avers.calculator.ui;
  */
 
 public interface ICalculatorView {
-    //TODO Нужно как-то использовать, только как )
-    public void showMessageTest(String message);
+    //Метод для получения текстового поля
+    String getInput();
+    //Вывести информацию в поле ввода
+    void displayResult(String s);
+    //Вывести информацию в поле истории
+    void displayHint(String s);
+    //Отобразить всплывающее сообщению
+    void showMessage(String message);
+
+
 }
