@@ -14,9 +14,7 @@ import softing.ubah4ukdev.avers.calculator.R;
 
 public class CalculatorActivity extends AppCompatActivity {
     private CalculatorPresenter presenter = new CalculatorPresenter(this);
-
-    private final static String MY_SAVED_PRESENTER = "CalcPresenter";
-
+    //private final static String MY_SAVED_PRESENTER = "CalcPresenter";
     //Поле для отображения вычислений и результата
     private EditText input;
     //Поле для вывода действий (типа история, отображающая последнее выполненное действие)
@@ -31,21 +29,37 @@ public class CalculatorActivity extends AppCompatActivity {
         } catch (Exception err) {
             Log.i("calc", "onCreate: " + err.getMessage());
         }
-
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle instanceState) {
-        //Сохраняем наш presenter
-        instanceState.putParcelable(MY_SAVED_PRESENTER, presenter);
         super.onSaveInstanceState(instanceState);
+        //Сохраняем наш presenter
+        //instanceState.putParcelable(MY_SAVED_PRESENTER, presenter);
+        instanceState.putString("inputValue", input.getText().toString());
+        instanceState.putString("hintValue", hint.getText().toString());
+        if (presenter.getArgOne() != null) instanceState.putDouble("arg1", presenter.getArgOne());
+        if (presenter.getArgTwo() != null) instanceState.putDouble("arg2", presenter.getArgTwo());
+        instanceState.putString("operation", presenter.getOperation().name());
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle instanceState) {
         super.onRestoreInstanceState(instanceState);
         //Восстанавливаем наш presenter
-        presenter = instanceState.getParcelable(MY_SAVED_PRESENTER);
+        //presenter = instanceState.getParcelable(MY_SAVED_PRESENTER);
+        String inputValue = instanceState.getString("inputValue");
+        input.setText(inputValue);
+        String hintValue = instanceState.getString("hintValue");
+        hint.setText(hintValue);
+        double arg1 = instanceState.getDouble("arg1");
+        presenter.setArgOne(arg1);
+        double arg2 = instanceState.getDouble("arg2");
+        presenter.setArgTwo(arg2);
+        String nameOperation = instanceState.getString("operation");
+        presenter.setOperation(presenter.getOperation().getValue(nameOperation));
+//      Log.d("test", "inputValue=" + inputValue + "\thintValue=" +hintValue +
+//                "\targ1=" + arg1 + "\targ2=" + arg2 + "\toperation=" + nameOperation);
     }
 
     //Метод инициализации. Для всех кнопок привязываем OnClickListener
@@ -97,45 +111,27 @@ public class CalculatorActivity extends AppCompatActivity {
         };
 
         findViewById(R.id.btnZero).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnOne).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnTwo).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnThree).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnFour).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnFive).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnSix).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnSeven).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnEight).setOnClickListener(clickNumbers);
-        ;
         findViewById(R.id.btnNine).setOnClickListener(clickNumbers);
-        ;
         //Точка
         findViewById(R.id.btnPoint).setOnClickListener(clickPoint);
-        ;
         //Равно
         findViewById(R.id.btnEqually).setOnClickListener(clickEqual);
-        ;
         //Операции
         findViewById(R.id.btnAdd).setOnClickListener(clickOperation);
-        ;
         findViewById(R.id.btnSub).setOnClickListener(clickOperation);
-        ;
         findViewById(R.id.btnDiv).setOnClickListener(clickOperation);
-        ;
         findViewById(R.id.btnMul).setOnClickListener(clickOperation);
-        ;
         //Очистка
         findViewById(R.id.btnDel).setOnClickListener(clickDel);
-        ;
         findViewById(R.id.btnBack).setOnClickListener(clickBack);
-        ;
     }
 
     public String getInput() {

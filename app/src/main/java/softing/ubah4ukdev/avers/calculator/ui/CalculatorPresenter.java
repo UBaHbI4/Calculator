@@ -1,14 +1,13 @@
 package softing.ubah4ukdev.avers.calculator.ui;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
+import softing.ubah4ukdev.avers.calculator.R;
 import softing.ubah4ukdev.avers.calculator.domain.CalculatorImpl;
 import softing.ubah4ukdev.avers.calculator.domain.ICalculator;
 import softing.ubah4ukdev.avers.calculator.domain.Operation;
@@ -22,7 +21,8 @@ import softing.ubah4ukdev.avers.calculator.domain.Operation;
  2021.03.10
  v1.0
  */
-public class CalculatorPresenter implements Parcelable {
+
+public class CalculatorPresenter {
     //Аргумент 1
     private Double argOne;
     //Аргумент 2
@@ -33,32 +33,8 @@ public class CalculatorPresenter implements Parcelable {
     private final DecimalFormat FORMAT = new DecimalFormat("0.##");
     private static CalculatorActivity view;
     private final ICalculator calculator = new CalculatorImpl();
+    private Map<Integer, String> btnIDMap = new HashMap<Integer, String>();
 
-    protected CalculatorPresenter(Parcel in, CalculatorActivity view) {
-        this.view = view;
-        if (in.readByte() == 0) {
-            argOne = null;
-        } else {
-            argOne = in.readDouble();
-        }
-        if (in.readByte() == 0) {
-            argTwo = null;
-        } else {
-            argTwo = in.readDouble();
-        }
-    }
-
-    public static final Creator<CalculatorPresenter> CREATOR = new Creator<CalculatorPresenter>() {
-        @Override
-        public CalculatorPresenter createFromParcel(Parcel in) {
-            return new CalculatorPresenter(in, view);
-        }
-
-        @Override
-        public CalculatorPresenter[] newArray(int size) {
-            return new CalculatorPresenter[size];
-        }
-    };
 
     public Double getArgOne() {
         return argOne;
@@ -86,12 +62,26 @@ public class CalculatorPresenter implements Parcelable {
 
     public CalculatorPresenter(CalculatorActivity view) {
         this.view = view;
+        btnIDMap.put(R.id.btnZero, "0");
+        btnIDMap.put(R.id.btnOne, "1");
+        btnIDMap.put(R.id.btnTwo, "2");
+        btnIDMap.put(R.id.btnThree, "3");
+        btnIDMap.put(R.id.btnFour, "4");
+        btnIDMap.put(R.id.btnFive, "5");
+        btnIDMap.put(R.id.btnSix, "6");
+        btnIDMap.put(R.id.btnSeven, "7");
+        btnIDMap.put(R.id.btnEight, "8");
+        btnIDMap.put(R.id.btnNine, "9");
+        btnIDMap.put(R.id.btnAdd, "+");
+        btnIDMap.put(R.id.btnSub, "-");
+        btnIDMap.put(R.id.btnDiv, "/");
+        btnIDMap.put(R.id.btnMul, "*");
     }
 
     //Click по цифровым клавишам
     void keyDigitClick(View value) {
         try {
-            String digitValue = ((MaterialButton) value).getText().toString();
+            String digitValue = btnIDMap.get(value.getId());
             String inputValue = view.getInput();
 
             if (operation == Operation.UNKNOWN) {
@@ -129,7 +119,6 @@ public class CalculatorPresenter implements Parcelable {
 
     //Click по клавише "."
     void keyPointClick() {
-        //TODO Доделать метод
         String inputValue = view.getInput();
         inputValue += ".";
         view.displayResult(inputValue);
@@ -138,31 +127,30 @@ public class CalculatorPresenter implements Parcelable {
 
     //Click по клавише "+-/*"
     void keyOperationClick(View value) {
-        //TODO Доделать метод
         try {
             String inputValue = view.getInput();
-            String tag = ((MaterialButton) value).getTag().toString();
-            if (operation == Operation.UNKNOWN) {
-                operation = getOperation(tag);
+            String operation = btnIDMap.get(value.getId());
+            if (this.operation == Operation.UNKNOWN) {
+                this.operation = getOperation(operation);
                 if (!inputValue.isEmpty()) {
-                    inputValue += " " + operation.getLabel();
+                    inputValue += " " + this.operation.getLabel();
                     view.displayResult(inputValue);
                 }
             } else {
-                String find = operation.getLabel();
-                operation = getOperation(tag);
+                String find = this.operation.getLabel();
+                this.operation = getOperation(operation);
                 if (inputValue.startsWith("-")) {
                     inputValue = inputValue.substring(1);
                     if (inputValue.indexOf(find, 1) > 0)
-                        inputValue = inputValue.replace(find, operation.getLabel());
+                        inputValue = inputValue.replace(find, this.operation.getLabel());
                     view.displayResult("-" + inputValue);
                 } else {
                     if (inputValue.indexOf(find, 1) > 0)
-                        inputValue = inputValue.replace(find, operation.getLabel());
+                        inputValue = inputValue.replace(find, this.operation.getLabel());
                     view.displayResult(inputValue);
                 }
             }
-            Log.i("calc", "keyOperationClick. \targsOne=" + argOne + "\t" + "argsTwo=" + argTwo + " operation=" + operation.getLabel());
+            Log.i("calc", "keyOperationClick. \targsOne=" + argOne + "\t" + "argsTwo=" + argTwo + " operation=" + this.operation.getLabel());
         } catch (Exception err) {
             Log.i("calc", "keyOperationClick: " + err.getMessage());
         }
@@ -184,7 +172,6 @@ public class CalculatorPresenter implements Parcelable {
 
     //Click по клавише "<--"
     void keyBackClick() {
-        //TODO Доделать метод
         try {
             String tempValue = "";
             String inputValue = view.getInput();
@@ -231,7 +218,6 @@ public class CalculatorPresenter implements Parcelable {
 
     //Click по клавише "DEL"
     void keyDelClick() {
-        //TODO Доделать метод
         view.displayResult("");
         view.displayHint("");
         argOne = null;
@@ -242,7 +228,6 @@ public class CalculatorPresenter implements Parcelable {
 
     //Click по клавише "="
     void keyEqualClick() {
-        //TODO Доделать метод
         try {
             if (operation == Operation.UNKNOWN) return;
             Double resultat = calculator.calculate(argOne, argTwo, operation);
@@ -261,16 +246,5 @@ public class CalculatorPresenter implements Parcelable {
             keyDelClick();
             Log.i("calc", "keyEqualClick: " + err.getMessage());
         }
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDouble(argOne);
-        dest.writeDouble(argOne);
     }
 }
