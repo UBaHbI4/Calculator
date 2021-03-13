@@ -10,11 +10,11 @@ package softing.ubah4ukdev.avers.calculator.domain;
  v1.0
  */
 public enum Operation {
-    ADD ("+"),
-    DIV ("/"),
-    MUL ("x"),
-    SUB ("-"),
-    UNKNOWN ("");
+    ADD("+"),
+    DIV("/"),
+    MUL("x"),
+    SUB("-"),
+    UNKNOWN("");
     private String label;
 
     public String getLabel() {
@@ -27,5 +27,9 @@ public enum Operation {
 
     Operation(String label) {
         this.label = label;
+    }
+
+    public Operation getValue(String name) {
+        return valueOf(name);
     }
 }
