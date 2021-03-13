@@ -6,28 +6,90 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/img_background"
-    tools:context=".CalculatorActivity">
-    
+    tools:context=".ui.CalculatorActivity"
+    tools:ignore="MissingDefaultResource">
+
+    <EditText
+        android:id="@+id/hint"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
+        android:background="@color/transparent"
+        android:focusable="false"
+        android:padding="@dimen/hintPadding"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="@dimen/inputTextSizeLnd"
+        app:layout_constraintBottom_toTopOf="@id/editTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/btnBack"
+        app:layout_constraintHeight_percent="@dimen/btnHeightPercent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
+        android:background="@color/transparent"
+        android:insetTop="@dimen/btnInsetDef"
+        android:insetBottom="@dimen/btnInsetDef"
+        android:textSize="@dimen/delTextSize"
+        app:cornerRadius="@dimen/btnCornerRadiusDef"
+        app:icon="@drawable/ic_operation_backspace"
+        app:iconGravity="textStart"
+        app:iconPadding="@dimen/iconPaddingDef"
+        app:iconSize="@dimen/iconSizeDef"
+        app:iconTint="@color/yellow"
+        app:layout_constraintBottom_toTopOf="@+id/spacer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/btnHeightPercent"
+        app:layout_constraintStart_toEndOf="@id/editTextNumberDecimal"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="@dimen/btnWidthPercentDef" />
+
     <EditText
         android:id="@+id/editTextNumberDecimal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
+        android:background="@color/transparent"
+        android:ellipsize="end"
         android:focusable="false"
         android:fontFamily="@font/roboto_bold"
-        android:gravity="bottom"
-        android:hint="@string/editTextHint"
-        android:textColor="@color/orange"
-        android:textColorHint="@color/white"
-        android:textSize="@dimen/btnTextSize"
+        android:padding="@dimen/hintPadding"
+        android:textAlignment="textEnd"
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/editTextSize"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/spacer"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDel"
+        app:layout_constraintHeight_percent="@dimen/btnHeightPercent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDel"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
+        android:background="@color/transparent"
+        android:insetTop="@dimen/btnInsetDef"
+        android:insetBottom="@dimen/btnInsetDef"
+        android:textSize="@dimen/delTextSize"
+        app:cornerRadius="@dimen/btnCornerRadiusDef"
+        app:icon="@drawable/ic_operation_delete"
+        app:iconGravity="textStart"
+        app:iconPadding="@dimen/iconPaddingDef"
+        app:iconSize="@dimen/iconSizeDef"
+        app:iconTint="@color/yellow"
+        app:layout_constraintBottom_toTopOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/btnHeightPercent"
+        app:layout_constraintStart_toEndOf="@id/hint"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="@dimen/btnWidthPercentDef" />
 
     <Space
         android:id="@+id/spacer"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/sizeZero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="@dimen/spaceHeight"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,8 +97,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSeven"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -58,8 +120,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEight"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -82,8 +144,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNine"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -106,12 +168,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDiv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/superLightGray"
         android:fontFamily="@font/roboto_bold"
         android:insetTop="@dimen/btnInsetDef"
         android:insetBottom="@dimen/btnInsetDef"
+        android:tag="@string/tagDiv"
         android:textColor="@color/orange"
         android:textSize="@dimen/btnTextSize"
         app:cornerRadius="@dimen/btnCornerRadiusDef"
@@ -133,8 +196,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFour"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -156,8 +219,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFive"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -180,8 +243,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSix"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -204,12 +267,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMul"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/superLightGray"
         android:fontFamily="@font/roboto_bold"
         android:insetTop="@dimen/btnInsetDef"
         android:insetBottom="@dimen/btnInsetDef"
+        android:tag="@string/tagMul"
         app:cornerRadius="@dimen/btnCornerRadiusDef"
         app:icon="@drawable/ic_operation_mul"
         app:iconGravity="textStart"
@@ -226,11 +290,10 @@
         app:strokeColor="@color/lightGray"
         app:strokeWidth="@dimen/btnStrokeWidthDef" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnOne"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -252,8 +315,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTwo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -276,8 +339,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnThree"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
         android:insetTop="@dimen/btnInsetDef"
@@ -299,12 +362,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSub"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:backgroundTint="@color/superLightGray"
         android:fontFamily="@font/roboto_bold"
         android:insetTop="@dimen/btnInsetDef"
         android:insetBottom="@dimen/btnInsetDef"
+        android:tag="@string/tagSub"
         app:cornerRadius="@dimen/btnCornerRadiusDef"
         app:icon="@drawable/ic_operation_sub"
         app:iconGravity="textStart"
@@ -324,8 +388,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnZero"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:layout_marginBottom="@dimen/marginBottomDef"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/zeyada"
@@ -348,8 +412,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPoint"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:layout_marginBottom="@dimen/marginBottomDef"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/roboto_bold"
@@ -372,8 +436,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEqually"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:layout_marginBottom="@dimen/marginBottomDef"
         android:backgroundTint="@color/orange"
         android:fontFamily="@font/roboto_bold"
@@ -398,13 +462,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAdd"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/sizeZero"
+        android:layout_height="@dimen/sizeZero"
         android:layout_marginBottom="@dimen/marginBottomDef"
         android:backgroundTint="@color/superLightGray"
         android:fontFamily="@font/roboto_bold"
         android:insetTop="@dimen/btnInsetDef"
         android:insetBottom="@dimen/btnInsetDef"
+        android:tag="@string/tagAdd"
         app:cornerRadius="@dimen/btnCornerRadiusDef"
         app:icon="@drawable/ic_operation_add"
         app:iconGravity="textStart"
