@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import softing.ubah4ukdev.avers.calculator.R;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends AppCompatActivity implements ICalculatorView {
     private CalculatorPresenter presenter = new CalculatorPresenter(this);
     //private final static String MY_SAVED_PRESENTER = "CalcPresenter";
     //Поле для отображения вычислений и результата
@@ -134,22 +134,32 @@ public class CalculatorActivity extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(clickBack);
     }
 
+    @Override
     public String getInput() {
         return input.getText().toString().trim();
     }
 
     //Метод для вывода в поле результатов
+    @Override
     public void displayResult(String s) {
         input.setText(s);
     }
 
     //Метод для вывода текста в поле истории
+    @Override
     public void displayHint(String s) {
         hint.setText(s);
     }
 
-    //Метод для вывода сообщений (например об ошибках)
+    @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+
+
+
+
 }
+
+
