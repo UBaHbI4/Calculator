@@ -31,7 +31,8 @@ public class CalculatorPresenter {
     private Operation operation = Operation.UNKNOWN;
     //Формат для вывода значений.
     private final DecimalFormat FORMAT = new DecimalFormat("0.##");
-    private static CalculatorActivity view;
+    //private static CalculatorActivity view;
+    private static ICalculatorView view;
     private final ICalculator calculator = new CalculatorImpl();
     private Map<Integer, String> btnIDMap = new HashMap<Integer, String>();
 
