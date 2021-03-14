@@ -27,7 +27,7 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
             setContentView(R.layout.activity_calculator);
             initCalculator();
         } catch (Exception err) {
-            Log.i("calc", "onCreate: " + err.getMessage());
+            //Log.i("calc", "onCreate: " + err.getMessage());
         }
     }
 
