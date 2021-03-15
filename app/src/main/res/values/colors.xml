@@ -12,8 +12,23 @@
     <color name="lightGray">#CFCCCC</color>
     <color name="superLightGray">#E8E6E6</color>
     <color name="rippleOperationColor">#00B8D4</color>
-    <color name="rippleEqualColor" >#AEEA00</color>
+    <color name="rippleEqualColor">#AEEA00</color>
     <color name="lightTransparent">#80FFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="yellow">#FFD600</color>
+    <color name="colorPrimaryLight">#FF6D00</color>
+    <color name="colorPrimaryVariantLight">#FFAB00</color>
+
+    <color name="colorOnPrimaryLight">#4E4A4A</color>
+    <color name="colorSecondaryVariantLight">#E8E6E6</color>
+    <color name="colorSecondaryLight">#FFFFFF</color>
+    <color name="colorOnSecondaryLight">#CFCCCC</color>
+
+
+    <color name="colorOnSecondaryDark">#FFFEFE</color>
+    <color name="colorSecondaryVariantDark">#4E4D4D</color>
+    <color name="colorSecondaryDark">#3E3A3A</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryVariantDark">#333231</color>
+    <color name="colorOnPrimaryDark">#FFFFFF</color>
 </resources>

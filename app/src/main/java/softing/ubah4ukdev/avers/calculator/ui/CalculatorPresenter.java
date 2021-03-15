@@ -36,7 +36,6 @@ public class CalculatorPresenter {
     private final ICalculator calculator = new CalculatorImpl();
     private Map<Integer, String> btnIDMap = new HashMap<Integer, String>();
 
-
     public Double getArgOne() {
         return argOne;
     }
@@ -61,7 +60,7 @@ public class CalculatorPresenter {
         this.operation = operation;
     }
 
-    public CalculatorPresenter(CalculatorActivity view) {
+    public CalculatorPresenter(ICalculatorView view) {
         this.view = view;
         btnIDMap.put(R.id.btnZero, "0");
         btnIDMap.put(R.id.btnOne, "1");
@@ -76,7 +75,7 @@ public class CalculatorPresenter {
         btnIDMap.put(R.id.btnAdd, "+");
         btnIDMap.put(R.id.btnSub, "-");
         btnIDMap.put(R.id.btnDiv, "/");
-        btnIDMap.put(R.id.btnMul, "*");
+        btnIDMap.put(R.id.btnMul, "x");
     }
 
     //Click по цифровым клавишам

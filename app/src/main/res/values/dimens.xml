@@ -16,7 +16,6 @@
     <dimen name="hintPadding">5dp</dimen>
     <dimen name="btnSize">0dp</dimen>
     <dimen name="sizeZero">0dp</dimen>
-    <dimen name="inputMaxLines">1</dimen>
     <dimen name="inputTextSizeLnd">25sp</dimen>
     <item name="spaceHeight" type="dimen" format="float">0.0</item>
     <item name="btnHeightPercentDef" type="dimen" format="float">0.18</item>

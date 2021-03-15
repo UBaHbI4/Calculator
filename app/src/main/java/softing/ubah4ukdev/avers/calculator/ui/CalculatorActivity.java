@@ -1,7 +1,6 @@
 package softing.ubah4ukdev.avers.calculator.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -155,11 +154,6 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
-
-
-
-
-
 }
 
 
