@@ -17,6 +17,7 @@
     <dimen name="btnSize">0dp</dimen>
     <dimen name="sizeZero">0dp</dimen>
     <dimen name="inputTextSizeLnd">25sp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
     <item name="spaceHeight" type="dimen" format="float">0.0</item>
     <item name="btnHeightPercentDef" type="dimen" format="float">0.18</item>
     <item name="btnWidthPercentDef" type="dimen" format="float">0.25</item>

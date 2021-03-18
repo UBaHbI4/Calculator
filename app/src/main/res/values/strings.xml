@@ -13,4 +13,6 @@
     <string name="btnEightText">8</string>
     <string name="btnNineText">9</string>
     <string name="btnPointText">.</string>
+    <string name="menuSettingsTitle">Настройки</string>
+
 </resources>

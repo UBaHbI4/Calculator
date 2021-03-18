@@ -1,5 +1,7 @@
 package softing.ubah4ukdev.avers.calculator.ui;
 
+import android.content.Intent;
+
 /****
  Project Calculator
  Package softing.ubah4ukdev.avers.calculator.ui
@@ -22,4 +24,10 @@ public interface ICalculatorView {
 
     //Отобразить всплывающее сообщению
     void showMessage(String message);
+
+    //Запуск активити
+    void showActivity(Intent intent);
+
+    //Метод пересоздания активити
+    void reCreate();
 }

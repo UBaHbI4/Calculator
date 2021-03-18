@@ -1,19 +1,26 @@
 package softing.ubah4ukdev.avers.calculator.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
 import softing.ubah4ukdev.avers.calculator.R;
+import softing.ubah4ukdev.avers.calculator.domain.Logger;
+import softing.ubah4ukdev.avers.calculator.domain.LoggerType;
 
-public class CalculatorActivity extends AppCompatActivity implements ICalculatorView {
-    private CalculatorPresenter presenter = new CalculatorPresenter(this);
-    //private final static String MY_SAVED_PRESENTER = "CalcPresenter";
+public class CalculatorActivity extends BaseActivity implements ICalculatorView {
+    private CalculatorPresenter presenter;
+
     //Поле для отображения вычислений и результата
     private EditText input;
     //Поле для вывода действий (типа история, отображающая последнее выполненное действие)
@@ -23,18 +30,32 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+            presenter = new CalculatorPresenter(this, mySettings);
             setContentView(R.layout.activity_calculator);
             initCalculator();
+            presenter.initStartValue(getIntent().getExtras());
         } catch (Exception err) {
-            //Log.i("calc", "onCreate: " + err.getMessage());
+            Logger.printLog(err.getMessage(), LoggerType.ERROR);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Logger.printLog("Счелкнули по меню");
+        presenter.menuSelect(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle instanceState) {
         super.onSaveInstanceState(instanceState);
-        //Сохраняем наш presenter
-        //instanceState.putParcelable(MY_SAVED_PRESENTER, presenter);
         instanceState.putString("inputValue", input.getText().toString());
         instanceState.putString("hintValue", hint.getText().toString());
         if (presenter.getArgOne() != null) instanceState.putDouble("arg1", presenter.getArgOne());
@@ -45,8 +66,6 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle instanceState) {
         super.onRestoreInstanceState(instanceState);
-        //Восстанавливаем наш presenter
-        //presenter = instanceState.getParcelable(MY_SAVED_PRESENTER);
         String inputValue = instanceState.getString("inputValue");
         input.setText(inputValue);
         String hintValue = instanceState.getString("hintValue");
@@ -57,8 +76,6 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
         presenter.setArgTwo(arg2);
         String nameOperation = instanceState.getString("operation");
         presenter.setOperation(presenter.getOperation().getValue(nameOperation));
-//      Log.d("test", "inputValue=" + inputValue + "\thintValue=" +hintValue +
-//                "\targ1=" + arg1 + "\targ2=" + arg2 + "\toperation=" + nameOperation);
     }
 
     //Метод инициализации. Для всех кнопок привязываем OnClickListener
@@ -153,6 +170,26 @@ public class CalculatorActivity extends AppCompatActivity implements ICalculator
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showActivity(Intent intent) {
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void reCreate() {
+        recreate();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == Activity.RESULT_OK) {
+                presenter.checkChange();
+            }
+        }
     }
 }
 
