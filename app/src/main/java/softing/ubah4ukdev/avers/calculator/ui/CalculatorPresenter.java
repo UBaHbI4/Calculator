@@ -1,6 +1,10 @@
 package softing.ubah4ukdev.avers.calculator.ui;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.text.DecimalFormat;
@@ -10,7 +14,9 @@ import java.util.Map;
 import softing.ubah4ukdev.avers.calculator.R;
 import softing.ubah4ukdev.avers.calculator.domain.CalculatorImpl;
 import softing.ubah4ukdev.avers.calculator.domain.ICalculator;
+import softing.ubah4ukdev.avers.calculator.domain.Logger;
 import softing.ubah4ukdev.avers.calculator.domain.Operation;
+import softing.ubah4ukdev.avers.calculator.domain.SettingsTheme;
 
 /****
  Project Calculator
@@ -34,6 +40,8 @@ public class CalculatorPresenter {
     //private static CalculatorActivity view;
     private static ICalculatorView view;
     private final ICalculator calculator = new CalculatorImpl();
+    SettingsTheme settingsTheme;
+    private int currentTheme;
     private Map<Integer, String> btnIDMap = new HashMap<Integer, String>();
 
     public Double getArgOne() {
@@ -60,8 +68,10 @@ public class CalculatorPresenter {
         this.operation = operation;
     }
 
-    public CalculatorPresenter(ICalculatorView view) {
+    public CalculatorPresenter(ICalculatorView view, SettingsTheme settingsTheme) {
         this.view = view;
+        this.settingsTheme = settingsTheme;
+        currentTheme = settingsTheme.getTheme();
         btnIDMap.put(R.id.btnZero, "0");
         btnIDMap.put(R.id.btnOne, "1");
         btnIDMap.put(R.id.btnTwo, "2");
@@ -245,6 +255,50 @@ public class CalculatorPresenter {
             view.showMessage(err.getMessage());
             keyDelClick();
             Log.i("calc", "keyEqualClick: " + err.getMessage());
+        }
+    }
+
+    //Обработка выбора пункта меню
+    void menuSelect(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.menu_item_settings) {
+            view.showActivity(new Intent((Context) view, SettingsActivity.class));
+        }
+    }
+
+    int getCurrentTheme() {
+        return settingsTheme.getTheme();
+    }
+
+    public void checkChange() {
+        if (currentTheme != getCurrentTheme()) {
+            Logger.printLog("NeedApply");
+            view.reCreate();
+        }
+    }
+
+    //Метод для вызова расчета калькулятором из другого приложения
+    //Можно было конечно еще из калькулятора вернуть результат в запускающее приложение :),
+    //но это уже другая история
+    public void initStartValue(Bundle bundle) {
+        try {
+            if (bundle == null) return;
+            String inputText = bundle.getString("inputText");
+            Double arg1 = bundle.getDouble("arg1");
+            Double arg2 = bundle.getDouble("arg2");
+            String operation = bundle.getString("operation");
+            view.displayResult(inputText);
+            setArgOne(arg1);
+            setArgTwo(arg2);
+            setOperation(getOperation(operation));
+            double result = calculator.calculate(arg1, arg2, getOperation(operation));
+            view.displayResult(FORMAT.format(result).replace(",", "."));
+            view.displayHint((FORMAT.format(argOne) + " " + operation + " "
+                    + FORMAT.format(argTwo)));
+            setArgOne(result);
+            setArgTwo(null);
+            setOperation(Operation.UNKNOWN);
+        } catch (Exception err) {
+            Logger.printLog(err.getMessage());
         }
     }
 }
