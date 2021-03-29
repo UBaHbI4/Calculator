@@ -6,6 +6,7 @@
 ---
 ### Калькулятор - первое приложение.
 ---
+<img src="ScreenShot/1.png" width="20" height="20" />
 ![screenshot](ScreenShot/1.png "Экран калькулятора")
 ![screenshot](ScreenShot/2.png "Экран калькулятора")
 ![screenshot](ScreenShot/3.png "Экран настроек")
